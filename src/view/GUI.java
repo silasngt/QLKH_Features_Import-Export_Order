@@ -330,14 +330,15 @@ public class GUI extends JFrame {
 		
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"M\u00E3 \u0111\u01A1n h\u00E0ng", "T\u00EAn nh\u00E0 cung c\u1EA5p", "T\u00EAn s\u1EA3n ph\u1EA9m", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng ti\u1EC1n"
-			}
-		));
-		
+		model_table =new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"M\u00E3 \u0111\u01A1n h\u00E0ng", "T\u00EAn nh\u00E0 cung c\u1EA5p", "T\u00EAn s\u1EA3n ph\u1EA9m", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng ti\u1EC1n"
+				}
+			);
+		table.setModel(model_table);
+		loadDataToTableNhap();
 		table.setRowHeight(25);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -1021,8 +1022,23 @@ public class GUI extends JFrame {
 		}
 	}
 	
-//	public void loadDataToTableNhap() {
-//		ArrayList<DonHang> arr = new ArrayList<DonHang>();
-//		arr = ctncontroller.getListnCCById();
-//	}
+	public void loadDataToTableNhap() {
+		ArrayList<DonHang> arr = new ArrayList<DonHang>();
+		arr = ctncontroller.getListChiTietNhap();
+		if (arr != null) {
+            for (DonHang donHang : arr) {
+                Vector<String> vec = new Vector<>();
+                vec.add(String.valueOf(donHang.getMaDonHang()));
+                if (donHang.getNhaCungCap() != null) {
+                    vec.add(donHang.getNhaCungCap().getTenNhaCungCap());
+                } else {
+                    vec.add(""); // Hoặc thêm một giá trị mặc định khác nếu không có nhaCungCap
+                } // Assuming nhaCungCap has getTenNCC() method
+                vec.add(donHang.getTenSanPham());
+                vec.add(String.valueOf(donHang.getSoLuong()));
+                vec.add(String.valueOf(donHang.getTongTien()));
+                model_table.addRow(vec);
+            }
+        }
+    }
 }

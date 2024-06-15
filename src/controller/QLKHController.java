@@ -3,9 +3,11 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import DAO.ChiTietNhapDAO;
 import model.DonHang;
+import model.nhaCungCap;
 import view.GUI;
 
 public class QLKHController implements ActionListener{
@@ -54,11 +56,13 @@ public class QLKHController implements ActionListener{
 		}
 		
 	}
-	public ArrayList<DonHang> getListnCCById(int maDH){
-		return ctnDAO.getListnCCById(maDH);
-	}
-	public String getTenNccById(int maNhaCungCap) {
-		return ctnDAO.getTenNccById(maNhaCungCap);
-	}
+	 public ArrayList<DonHang> getListChiTietNhap() {
+	        return ctnDAO.getListChiTietNhap();
+	    }
+
+	    // Updated method to get supplier details by ID
+	    public nhaCungCap getNhaCungCapById(int maNhaCungCap) {
+	        return ctnDAO.getNhaCungCapById(maNhaCungCap);
+	    }
 
 }
