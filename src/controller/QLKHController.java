@@ -60,7 +60,7 @@ public class QLKHController implements ActionListener{
 	        return ctnDAO.getListChiTietNhap();
 	    }
 
-	    // Updated method to get supplier details by ID
+	    
 	    public nhaCungCap getNhaCungCapById(int maNhaCungCap) {
 	        return ctnDAO.getNhaCungCapById(maNhaCungCap);
 	    }

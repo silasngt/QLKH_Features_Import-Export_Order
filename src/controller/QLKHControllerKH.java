@@ -56,7 +56,7 @@ public class QLKHControllerKH implements ActionListener {
 		}
 		
 	}
-//	Hàm giúp lấy dữ liệu để connect với database
+
 	public ArrayList<DonHangKH> getListChiTietXuat(){
 		return ctxDAO.getListChiTietXuat();
 	}

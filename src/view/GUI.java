@@ -388,7 +388,7 @@ public class GUI extends JFrame {
 		panel_1.add(btnHuyTim);
 		
 		
-//		Phần chức năng xuất
+//		PHẦN CHỨC NĂNG XUẤT
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Quản lý xuất hàng", null, panel_2, null);
 		panel_2.setLayout(null);
@@ -564,17 +564,11 @@ public class GUI extends JFrame {
 		panel_2.add(textField_TK_tenKH);
 		textField_TK_tenKH.setColumns(10);
 		
-		
-		
-		
-		
-		
-		
 
 	
 		this.setVisible(true);
 	}
-
+	// PHẦN CHỨC NĂNG NHẬP
 	public void xoaForm() {
 		textField_ID.setText("");
 		textField_tenSp.setText("");
@@ -583,15 +577,7 @@ public class GUI extends JFrame {
 		comboBox_tencungcap_1.setSelectedIndex(-1);
 		
 	}
-	public void xoaForm_xuat() {
-		textField_xuat_madon.setText("");
-		textField_xuat_tenKH.setText("");
-		textField_xuat_tenSP.setText("");
-		textField_xuat_soLuong.setText("");
-		textField_xuat_thanhTien.setText("");
-		
-		
-	}
+	
 	public void themDonHangVaoTable(DonHang dh) {
 		DefaultTableModel model_table =(DefaultTableModel) table.getModel();
 		model_table.addRow(new Object[] {
@@ -601,15 +587,7 @@ public class GUI extends JFrame {
 				dh.getSoLuong()+"",
 				dh.getTongTien()+""});
 	}
-	public void themDonHangVaoTable_xuat(DonHangKH dhKH) {
-		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
-		model_table_xuat.addRow(new Object[] {
-				dhKH.getMaDonHang()+"",
-				dhKH.getTenKhachHang(),
-				dhKH.getTenSanPham(),
-				dhKH.getSoLuong()+"",
-				dhKH.getTongTien()+""});
-	}
+	
 	public void themHoacCapNhatDonHang(DonHang dh) {
 		DefaultTableModel model_table =(DefaultTableModel) table.getModel();
 		if(!this.model.kiemTraTonTai(dh)) {
@@ -634,30 +612,7 @@ public class GUI extends JFrame {
 		}
 		
 	}
-	public void themHoacCapNhatDonHang_xuat(DonHangKH dhKH) {
-		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
-		if(!this.model.kiemTraTonTai_xuat(dhKH)) {
-			this.model.insert_xuat(dhKH);
-		
-			this.themDonHangVaoTable_xuat(dhKH);
-		
-		
-		} else {
-			this.model.update_xuat(dhKH);
-			int soLuongDong_xuat = model_table_xuat.getRowCount();
-			for (int i = 0; i < soLuongDong_xuat; i++) {
-				String id = model_table_xuat.getValueAt(i, 0)+""; 
-				if(id.equals(dhKH.getMaDonHang()+"")){
-					model_table_xuat.setValueAt(dhKH.getMaDonHang()+"",i,0);
-					model_table_xuat.setValueAt(dhKH.getTenKhachHang(),i,1);
-					model_table_xuat.setValueAt(dhKH.getTenSanPham(),i,2);
-					model_table_xuat.setValueAt(dhKH.getSoLuong()+"",i,3);
-					model_table_xuat.setValueAt(dhKH.getTongTien()+"",i,4);
-				}
-			}
-		}
-		
-	}
+	
 
 	
 	public  DonHang getDonHangDaChon() {
@@ -673,19 +628,7 @@ public class GUI extends JFrame {
 		DonHang dh = new DonHang(maDonHang, nCC_2, tenSanPham, soLuong, tongTien);
 		return dh;
 	}
-	public  DonHangKH getDonHangDaChon_xuat() {
-		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
-		int i_row = table_xuat.getSelectedRow();
-		model_table_xuat.getValueAt(i_row, 0);
-		int maDonHang = Integer.valueOf(model_table_xuat.getValueAt(i_row, 0)+"");
-		String tenKhachHang = model_table_xuat.getValueAt(i_row, 1)+"";
-		String tenSanPham = model_table_xuat.getValueAt(i_row, 2)+"";
-		int soLuong = Integer.valueOf(model_table_xuat.getValueAt(i_row, 3)+"");
-		float thanhTien = Float.valueOf(model_table_xuat.getValueAt(i_row, 4)+"");
-		
-		DonHangKH dhKH = new DonHangKH(maDonHang, tenKhachHang, tenSanPham, soLuong, thanhTien);
-		return dhKH;
-	}
+	
 	
 	public void hienThiThongTinDonHangDaChon() {
 		DonHang dh = getDonHangDaChon();
@@ -696,15 +639,7 @@ public class GUI extends JFrame {
 		this.textField_soLuongSp.setText(dh.getSoLuong()+"");
 		this.textField_tongTien.setText(dh.getTongTien()+"");
 	}
-	public void hienThiThongTinDonHangDaChon_xuat() {
-		DonHangKH dhKH = getDonHangDaChon_xuat();
-		
-		this.textField_xuat_madon.setText(dhKH.getMaDonHang()+"");
-		this.textField_xuat_tenKH.setText(dhKH.getTenKhachHang()+"");
-		this.textField_xuat_tenSP.setText(dhKH.getTenSanPham()+"");
-		this.textField_xuat_soLuong.setText(dhKH.getSoLuong()+"");
-		this.textField_xuat_thanhTien.setText(dhKH.getTongTien()+"");
-	}
+	
 
 	public void thucHienXoa() {
 		DefaultTableModel model_table =(DefaultTableModel) table.getModel();
@@ -717,17 +652,7 @@ public class GUI extends JFrame {
 		}
 		
 	}
-	public void thucHienXoa_xuat() {
-		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
-		int i_row = table_xuat.getSelectedRow();
-		int luaChon_xuat = JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn xóa dòng đã chọn");
-		if(luaChon_xuat == JOptionPane.YES_OPTION) {
-			DonHangKH dhKH = getDonHangDaChon_xuat();
-			this.model.delete_xuat(dhKH);
-			model_table_xuat.removeRow(i_row);
-		}
-		
-	}
+	
 
 	public void thucHienThemDonHang() {
 		int maDonHang = Integer.valueOf(this.textField_ID.getText());
@@ -741,17 +666,7 @@ public class GUI extends JFrame {
 		this.themHoacCapNhatDonHang(dh);
 		
 	}
-	public void thucHienThemDonHang_xuat() {
-		int maDonHang_xuat = Integer.valueOf(this.textField_xuat_madon.getText());
-		String tenKhachHang_xuat = this.textField_xuat_tenKH.getText();
-		String tenSanPham_xuat = this.textField_xuat_tenSP.getText();
-		int soLuong_xuat = Integer.valueOf(this.textField_xuat_soLuong.getText());
-		float thanhTien_xuat = Float.valueOf(this.textField_xuat_thanhTien.getText());
-		
-		DonHangKH dhKH = new DonHangKH(maDonHang_xuat, tenKhachHang_xuat, tenSanPham_xuat, soLuong_xuat, thanhTien_xuat);
-		this.themHoacCapNhatDonHang_xuat(dhKH);
-		
-	}
+	
 	
 
 	public void thucHienTim() {
@@ -802,7 +717,200 @@ public class GUI extends JFrame {
 			}
 		}
 	}
-	public void thucHienTim_xuat() {
+	
+	
+	public void thucHienTaiLaiDuLieu() {
+		while (true) {
+			
+			DefaultTableModel model_table =(DefaultTableModel) table.getModel();
+			int soLuongDong = model_table.getRowCount();
+			if(soLuongDong==0) 
+				break;
+			else
+			{
+				try {
+					model_table.removeRow(0);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		for(DonHang dh : this.model.getDsDonHang()) {
+			this.themDonHangVaoTable(dh);
+		}
+		
+	}
+	
+	public void saveFile(String path) {
+		try {
+			this.model .setTenFile(path);
+			FileOutputStream fos = new FileOutputStream(path);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			for (DonHang dh: this.model.getDsDonHang()) {
+				oos.writeObject(dh);
+			}
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void thucHienXuatFile() {
+		if(this.model.getTenFile().length()>0) {
+			saveFile(this.model.getTenFile());
+		}else {
+			JFileChooser fc = new JFileChooser();
+			int returnVal = fc.showSaveDialog(this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				saveFile(file.getAbsolutePath());
+			  } 
+		  }
+		
+	}
+	
+	public void openFile(File file) {
+		ArrayList<DonHang> ds = new  ArrayList<DonHang>();
+		try {
+			this.model .setTenFile(file.getAbsolutePath());
+			FileInputStream fis = new FileInputStream(file);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			DonHang dh = null;
+			while((dh= (DonHang) ois.readObject())!=null) {
+				ds.add(dh);
+			}
+			this.model.setDsDonHang(ds);
+			ois.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		this.model.setDsDonHang(ds);
+	}
+	
+	public void thucHienMoFile() {
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			openFile(file);
+			thucHienTaiLaiDuLieu();
+		  }     
+		
+	}
+	public void loadDataToTableNhap() {
+		ArrayList<DonHang> arr = new ArrayList<DonHang>();
+		arr = ctncontroller.getListChiTietNhap();
+		if (arr != null) {
+            for (DonHang donHang : arr) {
+                Vector<String> vec = new Vector<>();
+                vec.add(String.valueOf(donHang.getMaDonHang()));
+                if (donHang.getNhaCungCap() != null) {
+                    vec.add(donHang.getNhaCungCap().getTenNhaCungCap());
+                } else {
+                    vec.add(""); // Hoặc thêm một giá trị mặc định khác nếu không có nhaCungCap
+                } // Assuming nhaCungCap has getTenNCC() method
+                vec.add(donHang.getTenSanPham());
+                vec.add(String.valueOf(donHang.getSoLuong()));
+                vec.add(String.valueOf(donHang.getTongTien()));
+                model_table.addRow(vec);
+            }
+        }
+    }
+	
+	
+	
+	
+	//	PHẦN CHỨC NĂNG XUẤT
+	public void xoaForm_xuat() {
+		textField_xuat_madon.setText("");
+		textField_xuat_tenKH.setText("");
+		textField_xuat_tenSP.setText("");
+		textField_xuat_soLuong.setText("");
+		textField_xuat_thanhTien.setText("");
+	}
+	
+	public void themDonHangVaoTable_xuat(DonHangKH dhKH) {
+		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
+		model_table_xuat.addRow(new Object[] {
+				dhKH.getMaDonHang()+"",
+				dhKH.getTenKhachHang(),
+				dhKH.getTenSanPham(),
+				dhKH.getSoLuong()+"",
+				dhKH.getTongTien()+""});
+	}
+	
+	public void themHoacCapNhatDonHang_xuat(DonHangKH dhKH) {
+		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
+		if(!this.model.kiemTraTonTai_xuat(dhKH)) {
+			this.model.insert_xuat(dhKH);
+		
+			this.themDonHangVaoTable_xuat(dhKH);
+		
+		
+		} else {
+			this.model.update_xuat(dhKH);
+			int soLuongDong_xuat = model_table_xuat.getRowCount();
+			for (int i = 0; i < soLuongDong_xuat; i++) {
+				String id = model_table_xuat.getValueAt(i, 0)+""; 
+				if(id.equals(dhKH.getMaDonHang()+"")){
+					model_table_xuat.setValueAt(dhKH.getMaDonHang()+"",i,0);
+					model_table_xuat.setValueAt(dhKH.getTenKhachHang(),i,1);
+					model_table_xuat.setValueAt(dhKH.getTenSanPham(),i,2);
+					model_table_xuat.setValueAt(dhKH.getSoLuong()+"",i,3);
+					model_table_xuat.setValueAt(dhKH.getTongTien()+"",i,4);
+				}
+			}
+		}
+		
+	}
+	
+	public  DonHangKH getDonHangDaChon_xuat() {
+		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
+		int i_row = table_xuat.getSelectedRow();
+		model_table_xuat.getValueAt(i_row, 0);
+		int maDonHang = Integer.valueOf(model_table_xuat.getValueAt(i_row, 0)+"");
+		String tenKhachHang = model_table_xuat.getValueAt(i_row, 1)+"";
+		String tenSanPham = model_table_xuat.getValueAt(i_row, 2)+"";
+		int soLuong = Integer.valueOf(model_table_xuat.getValueAt(i_row, 3)+"");
+		float thanhTien = Float.valueOf(model_table_xuat.getValueAt(i_row, 4)+"");
+		
+		DonHangKH dhKH = new DonHangKH(maDonHang, tenKhachHang, tenSanPham, soLuong, thanhTien);
+		return dhKH;
+	}
+	public void hienThiThongTinDonHangDaChon_xuat() {
+		DonHangKH dhKH = getDonHangDaChon_xuat();
+		
+		this.textField_xuat_madon.setText(dhKH.getMaDonHang()+"");
+		this.textField_xuat_tenKH.setText(dhKH.getTenKhachHang()+"");
+		this.textField_xuat_tenSP.setText(dhKH.getTenSanPham()+"");
+		this.textField_xuat_soLuong.setText(dhKH.getSoLuong()+"");
+		this.textField_xuat_thanhTien.setText(dhKH.getTongTien()+"");
+	}
+	public void thucHienXoa_xuat() {
+		DefaultTableModel model_table_xuat =(DefaultTableModel) table_xuat.getModel();
+		int i_row = table_xuat.getSelectedRow();
+		int luaChon_xuat = JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn xóa dòng đã chọn");
+		if(luaChon_xuat == JOptionPane.YES_OPTION) {
+			DonHangKH dhKH = getDonHangDaChon_xuat();
+			this.model.delete_xuat(dhKH);
+			model_table_xuat.removeRow(i_row);
+		}
+		
+	}
+	public void thucHienThemDonHang_xuat() {
+		int maDonHang_xuat = Integer.valueOf(this.textField_xuat_madon.getText());
+		String tenKhachHang_xuat = this.textField_xuat_tenKH.getText();
+		String tenSanPham_xuat = this.textField_xuat_tenSP.getText();
+		int soLuong_xuat = Integer.valueOf(this.textField_xuat_soLuong.getText());
+		float thanhTien_xuat = Float.valueOf(this.textField_xuat_thanhTien.getText());
+		
+		DonHangKH dhKH = new DonHangKH(maDonHang_xuat, tenKhachHang_xuat, tenSanPham_xuat, soLuong_xuat, thanhTien_xuat);
+		this.themHoacCapNhatDonHang_xuat(dhKH);
+		
+	}
+public void thucHienTim_xuat() {
 		
 		this.thucHienTaiLaiDuLieu_xuat();
 	    
@@ -851,29 +959,6 @@ public class GUI extends JFrame {
 	        }
 	    }
 	}
-	
-	public void thucHienTaiLaiDuLieu() {
-		while (true) {
-			
-			DefaultTableModel model_table =(DefaultTableModel) table.getModel();
-			int soLuongDong = model_table.getRowCount();
-			if(soLuongDong==0) 
-				break;
-			else
-			{
-				try {
-					model_table.removeRow(0);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}
-		for(DonHang dh : this.model.getDsDonHang()) {
-			this.themDonHangVaoTable(dh);
-		}
-		
-	}
 	public void thucHienTaiLaiDuLieu_xuat() {
 		while (true) {
 			
@@ -896,19 +981,6 @@ public class GUI extends JFrame {
 		}
 		
 	}
-	public void saveFile(String path) {
-		try {
-			this.model .setTenFile(path);
-			FileOutputStream fos = new FileOutputStream(path);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			for (DonHang dh: this.model.getDsDonHang()) {
-				oos.writeObject(dh);
-			}
-			oos.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	public void saveFile_xuat(String path) {
 		try {
 			this.model .setTenFile(path);
@@ -922,19 +994,6 @@ public class GUI extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	public void thucHienXuatFile() {
-		if(this.model.getTenFile().length()>0) {
-			saveFile(this.model.getTenFile());
-		}else {
-			JFileChooser fc = new JFileChooser();
-			int returnVal = fc.showSaveDialog(this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				saveFile(file.getAbsolutePath());
-			  } 
-		  }
-		
-	}
 	public void thucHienXuatFile_xuat() {
 		if(this.model.getTenFile().length()>0) {
 			saveFile_xuat(this.model.getTenFile());
@@ -947,24 +1006,6 @@ public class GUI extends JFrame {
 			  } 
 		  }
 		
-	}
-	public void openFile(File file) {
-		ArrayList<DonHang> ds = new  ArrayList<DonHang>();
-		try {
-			this.model .setTenFile(file.getAbsolutePath());
-			FileInputStream fis = new FileInputStream(file);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			
-			DonHang dh = null;
-			while((dh= (DonHang) ois.readObject())!=null) {
-				ds.add(dh);
-			}
-			this.model.setDsDonHang(ds);
-			ois.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		this.model.setDsDonHang(ds);
 	}
 	public void openFile_xuat(File file) {
 		ArrayList<DonHangKH> ds = new  ArrayList<DonHangKH>();
@@ -984,16 +1025,6 @@ public class GUI extends JFrame {
 		}
 		this.model.setDsDonHangKH(ds);
 	}
-	public void thucHienMoFile() {
-		JFileChooser fc = new JFileChooser();
-		int returnVal = fc.showOpenDialog(this);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			File file = fc.getSelectedFile();
-			openFile(file);
-			thucHienTaiLaiDuLieu();
-		  }     
-		
-	}
 	public void thucHienMoFile_xuat() {
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(this);
@@ -1004,6 +1035,7 @@ public class GUI extends JFrame {
 		  } 
 		
 	}
+	
 	public void loadDatatoTableXuat() {
 		ArrayList<DonHangKH> arr = new ArrayList<>();
 		arr = ctxcontroller.getListChiTietXuat();
@@ -1022,23 +1054,9 @@ public class GUI extends JFrame {
 		}
 	}
 	
-	public void loadDataToTableNhap() {
-		ArrayList<DonHang> arr = new ArrayList<DonHang>();
-		arr = ctncontroller.getListChiTietNhap();
-		if (arr != null) {
-            for (DonHang donHang : arr) {
-                Vector<String> vec = new Vector<>();
-                vec.add(String.valueOf(donHang.getMaDonHang()));
-                if (donHang.getNhaCungCap() != null) {
-                    vec.add(donHang.getNhaCungCap().getTenNhaCungCap());
-                } else {
-                    vec.add(""); // Hoặc thêm một giá trị mặc định khác nếu không có nhaCungCap
-                } // Assuming nhaCungCap has getTenNCC() method
-                vec.add(donHang.getTenSanPham());
-                vec.add(String.valueOf(donHang.getSoLuong()));
-                vec.add(String.valueOf(donHang.getTongTien()));
-                model_table.addRow(vec);
-            }
-        }
-    }
+	
+	
+	
+	
+
 }
