@@ -1,22 +1,23 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class DonHangKH implements Serializable {
 	private int maDonHang;
 	private String tenKhachHang;
-	private String tenSanPham;
+	private String ngayXuat;
 	private int soLuong;
 	private float TongTien;
 	
 	public DonHangKH() {
 	}
 
-	public DonHangKH(int maDonHang, String tenKhachHang, String tenSanPham, int soLuong, float tongTien) {
+	public DonHangKH(int maDonHang, String tenKhachHang, String ngayXuat, int soLuong, float tongTien) {
 		this.maDonHang = maDonHang;
 		this.tenKhachHang = tenKhachHang;
-		this.tenSanPham = tenSanPham;
+		this.ngayXuat = ngayXuat;
 		this.soLuong = soLuong;
 		TongTien = tongTien;
 	}
@@ -37,12 +38,15 @@ public class DonHangKH implements Serializable {
 		this.tenKhachHang = tenKhachHang;
 	}
 
-	public String getTenSanPham() {
-		return tenSanPham;
+
+	
+
+	public String getNgayXuat() {
+		return ngayXuat;
 	}
 
-	public void setTenSanPham(String tenSanPham) {
-		this.tenSanPham = tenSanPham;
+	public void setNgayXuat(String ngayXuat) {
+		this.ngayXuat = ngayXuat;
 	}
 
 	public int getSoLuong() {
@@ -63,13 +67,13 @@ public class DonHangKH implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DonHangKH [maDonHang=" + maDonHang + ", tenKhachHang=" + tenKhachHang + ", tenSanPham=" + tenSanPham
+		return "DonHangKH [maDonHang=" + maDonHang + ", tenKhachHang=" + tenKhachHang + ", ngayXuat=" + ngayXuat
 				+ ", soLuong=" + soLuong + ", TongTien=" + TongTien + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(TongTien, maDonHang, soLuong, tenKhachHang, tenSanPham);
+		return Objects.hash(TongTien, maDonHang, ngayXuat, soLuong, tenKhachHang);
 	}
 
 	@Override
@@ -82,9 +86,9 @@ public class DonHangKH implements Serializable {
 			return false;
 		DonHangKH other = (DonHangKH) obj;
 		return Float.floatToIntBits(TongTien) == Float.floatToIntBits(other.TongTien) && maDonHang == other.maDonHang
-				&& soLuong == other.soLuong && Objects.equals(tenKhachHang, other.tenKhachHang)
-				&& Objects.equals(tenSanPham, other.tenSanPham);
+				&& Objects.equals(ngayXuat, other.ngayXuat) && soLuong == other.soLuong
+				&& Objects.equals(tenKhachHang, other.tenKhachHang);
 	}
-	
+
 	
 }

@@ -20,13 +20,13 @@ public class ChiTietXuatDAO {
 				while(resultSet.next()) {
 					int maDonHang = resultSet.getInt("maDH");
 					String tenKhachHang = resultSet.getString("tenKH");
-					String tenSanPham = resultSet.getString("tenSP");
+					String ngayXuat = resultSet.getString("NgayXuat");
 					int soLuong = resultSet.getInt("SoLuong");
 					float ThanhTien =resultSet.getFloat("ThanhTien");
 					DonHangKH ctx = new DonHangKH();
 					ctx.setMaDonHang(maDonHang);
 					ctx.setTenKhachHang(tenKhachHang);
-					ctx.setTenSanPham(tenSanPham);
+					ctx.setNgayXuat(ngayXuat);
 					ctx.setSoLuong(soLuong);
 					ctx.setTongTien(ThanhTien);
 					

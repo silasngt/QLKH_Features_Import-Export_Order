@@ -12,7 +12,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
@@ -37,7 +40,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-
 import controller.QLKHController;
 import controller.QLKHControllerKH;
 import model.DonHang;
@@ -60,7 +62,7 @@ public class GUI extends JFrame {
 	public JComboBox comboBox_TK_tencungcap;
 	private JTextField textField_xuat_madon;
 	private JTextField textField_xuat_tenKH;
-	private JTextField textField_xuat_tenSP;
+	private JTextField textField_xuat_ngayXuat;
 	private JTextField textField_xuat_soLuong;
 	private JTextField textField_xuat_thanhTien;
 	private JTable table_xuat;
@@ -70,6 +72,7 @@ public class GUI extends JFrame {
 	private QLKHControllerKH ctxcontroller = new QLKHControllerKH();
 	private QLKHController ctncontroller = new QLKHController();
 	private DefaultTableModel model_table;
+	private JTextField textField_ngayNhap;
 	/**
 	 * Launch the application.
 	 */
@@ -232,7 +235,7 @@ public class GUI extends JFrame {
 		
 		JLabel Label_soluongsp = new JLabel("Số lượng sản phẩm :");
 		Label_soluongsp.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		Label_soluongsp.setBounds(30, 110, 120, 24);
+		Label_soluongsp.setBounds(245, 109, 120, 24);
 		panel_1.add(Label_soluongsp);
 		
 		JLabel Label_tongtien = new JLabel("Tổng tiền :");
@@ -263,7 +266,7 @@ public class GUI extends JFrame {
 		
 		textField_soLuongSp = new JTextField();
 		textField_soLuongSp.setColumns(10);
-		textField_soLuongSp.setBounds(149, 112, 269, 20);
+		textField_soLuongSp.setBounds(367, 111, 51, 20);
 		panel_1.add(textField_soLuongSp);
 		
 		textField_tongTien = new JTextField();
@@ -334,7 +337,7 @@ public class GUI extends JFrame {
 				new Object[][] {
 				},
 				new String[] {
-					"M\u00E3 \u0111\u01A1n h\u00E0ng", "T\u00EAn nh\u00E0 cung c\u1EA5p", "T\u00EAn s\u1EA3n ph\u1EA9m", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng ti\u1EC1n"
+					"M\u00E3 \u0111\u01A1n h\u00E0ng", "T\u00EAn nh\u00E0 cung c\u1EA5p", "T\u00EAn s\u1EA3n ph\u1EA9m","Ngày nhập", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng ti\u1EC1n"
 				}
 			);
 		table.setModel(model_table);
@@ -411,10 +414,10 @@ public class GUI extends JFrame {
 		lblNewLabel_xuat_tenKH.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel_2.add(lblNewLabel_xuat_tenKH);
 		
-		JLabel lblNewLabel_xuat_tenSP = new JLabel("Tên sản phẩm :");
-		lblNewLabel_xuat_tenSP.setBounds(42, 92, 90, 14);
-		lblNewLabel_xuat_tenSP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		panel_2.add(lblNewLabel_xuat_tenSP);
+		JLabel lblNewLabel_xuat_ngayXuat = new JLabel("Ngày xuất :");
+		lblNewLabel_xuat_ngayXuat.setBounds(66, 91, 90, 14);
+		lblNewLabel_xuat_ngayXuat.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_2.add(lblNewLabel_xuat_ngayXuat);
 		
 		JLabel lblNewLabel_xuat_soLuong = new JLabel("Số lượng :");
 		lblNewLabel_xuat_soLuong.setBounds(71, 116, 63, 14);
@@ -436,10 +439,10 @@ public class GUI extends JFrame {
 		textField_xuat_tenKH.setColumns(10);
 		panel_2.add(textField_xuat_tenKH);
 		
-		textField_xuat_tenSP = new JTextField();
-		textField_xuat_tenSP.setBounds(138, 88, 260, 20);
-		textField_xuat_tenSP.setColumns(10);
-		panel_2.add(textField_xuat_tenSP);
+		textField_xuat_ngayXuat = new JTextField();
+		textField_xuat_ngayXuat.setBounds(138, 88, 260, 20);
+		textField_xuat_ngayXuat.setColumns(10);
+		panel_2.add(textField_xuat_ngayXuat);
 		
 		textField_xuat_soLuong = new JTextField();
 		textField_xuat_soLuong.setBounds(138, 113, 260, 20);
@@ -510,12 +513,22 @@ public class GUI extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Mã đơn hàng","Tên khách hàng","Tên sản phẩm","Số lượng","Thành Tiền"
+				"Mã đơn hàng","Tên khách hàng","Ngày xuất","Số lượng","Thành Tiền"
 			}
 		);
 		table_xuat.setModel(model_table);
 		loadDatatoTableXuat();
 		table.setRowHeight(25);
+		
+		JLabel Label_ngayNhap = new JLabel("Ngày nhập :");
+		Label_ngayNhap.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		Label_ngayNhap.setBounds(77, 108, 70, 24);
+		panel_1.add(Label_ngayNhap);
+		
+		textField_ngayNhap = new JTextField();
+		textField_ngayNhap.setColumns(10);
+		textField_ngayNhap.setBounds(149, 111, 89, 20);
+		panel_1.add(textField_ngayNhap);
 		
 		JScrollPane scrollPane_xuat = new JScrollPane(table_xuat);
 		scrollPane_xuat.setBounds(11, 230, 520, 139);
@@ -572,6 +585,7 @@ public class GUI extends JFrame {
 	public void xoaForm() {
 		textField_ID.setText("");
 		textField_tenSp.setText("");
+		textField_ngayNhap.setText("");
 		textField_soLuongSp.setText("");
 		textField_tongTien.setText("");
 		comboBox_tencungcap_1.setSelectedIndex(-1);
@@ -584,6 +598,7 @@ public class GUI extends JFrame {
 				dh.getMaDonHang()+"",
 				dh.getNhaCungCap().getTenNhaCungCap(),
 				dh.getTenSanPham(),
+				dh.getNgayNhap(),
 				dh.getSoLuong()+"",
 				dh.getTongTien()+""});
 	}
@@ -605,8 +620,9 @@ public class GUI extends JFrame {
 					model_table.setValueAt(dh.getMaDonHang()+"",i,0);
 					model_table.setValueAt(dh.getNhaCungCap().getTenNhaCungCap()+"",i,1);
 					model_table.setValueAt(dh.getTenSanPham(),i,2);
-					model_table.setValueAt(dh.getSoLuong()+"",i,3);
-					model_table.setValueAt(dh.getTongTien()+"",i,4);
+					model_table.setValueAt(dh.getNgayNhap(), i, 3);
+					model_table.setValueAt(dh.getSoLuong()+"",i,4);
+					model_table.setValueAt(dh.getTongTien()+"",i,5);
 				}
 			}
 		}
@@ -622,10 +638,11 @@ public class GUI extends JFrame {
 		int maDonHang = Integer.valueOf(model_table.getValueAt(i_row, 0)+"");
 		nhaCungCap nCC_2 = nhaCungCap.getnCCByTen(model_table.getValueAt(i_row, 1)+"");
 		String tenSanPham = model_table.getValueAt(i_row, 2)+"";
-		int soLuong = Integer.valueOf(model_table.getValueAt(i_row, 3)+"");
-		float tongTien = Float.valueOf(model_table.getValueAt(i_row, 4)+"");
+		String ngayNhap = model_table.getValueAt(i_row, 3)+"";
+		int soLuong = Integer.valueOf(model_table.getValueAt(i_row, 4)+"");
+		float tongTien = Float.valueOf(model_table.getValueAt(i_row, 5)+"");
 		
-		DonHang dh = new DonHang(maDonHang, nCC_2, tenSanPham, soLuong, tongTien);
+		DonHang dh = new DonHang(maDonHang, nCC_2, tenSanPham,ngayNhap, soLuong, tongTien);
 		return dh;
 	}
 	
@@ -636,6 +653,7 @@ public class GUI extends JFrame {
 		this.textField_ID.setText(dh.getMaDonHang()+"");
 		this.comboBox_tencungcap_1.setSelectedItem(dh.getNhaCungCap().getTenNhaCungCap());
 		this.textField_tenSp.setText(dh.getTenSanPham()+"");
+		this.textField_ngayNhap.setText(dh.getNgayNhap()+"");
 		this.textField_soLuongSp.setText(dh.getSoLuong()+"");
 		this.textField_tongTien.setText(dh.getTongTien()+"");
 	}
@@ -659,10 +677,11 @@ public class GUI extends JFrame {
 		int nhaCungCap_1 = this.comboBox_tencungcap_1.getSelectedIndex()-1;
 		nhaCungCap nCC = nhaCungCap.getnCCById(nhaCungCap_1);
 		String tenSanPham = this.textField_tenSp.getText();
+		String ngayNhap = this.textField_ngayNhap.getText();
 		int soLuong = Integer.valueOf(this.textField_soLuongSp.getText());
 		float tongTien = Float.valueOf(this.textField_tongTien.getText());
 		
-		DonHang dh = new DonHang(maDonHang, nCC, tenSanPham, soLuong, tongTien);
+		DonHang dh = new DonHang(maDonHang, nCC, tenSanPham,ngayNhap, soLuong, tongTien);
 		this.themHoacCapNhatDonHang(dh);
 		
 	}
@@ -812,6 +831,7 @@ public class GUI extends JFrame {
                     vec.add(""); // Hoặc thêm một giá trị mặc định khác nếu không có nhaCungCap
                 } // Assuming nhaCungCap has getTenNCC() method
                 vec.add(donHang.getTenSanPham());
+                vec.add(donHang.getNgayNhap());
                 vec.add(String.valueOf(donHang.getSoLuong()));
                 vec.add(String.valueOf(donHang.getTongTien()));
                 model_table.addRow(vec);
@@ -826,7 +846,7 @@ public class GUI extends JFrame {
 	public void xoaForm_xuat() {
 		textField_xuat_madon.setText("");
 		textField_xuat_tenKH.setText("");
-		textField_xuat_tenSP.setText("");
+		textField_xuat_ngayXuat.setText("");
 		textField_xuat_soLuong.setText("");
 		textField_xuat_thanhTien.setText("");
 	}
@@ -836,7 +856,7 @@ public class GUI extends JFrame {
 		model_table_xuat.addRow(new Object[] {
 				dhKH.getMaDonHang()+"",
 				dhKH.getTenKhachHang(),
-				dhKH.getTenSanPham(),
+				dhKH.getNgayXuat(),
 				dhKH.getSoLuong()+"",
 				dhKH.getTongTien()+""});
 	}
@@ -857,7 +877,7 @@ public class GUI extends JFrame {
 				if(id.equals(dhKH.getMaDonHang()+"")){
 					model_table_xuat.setValueAt(dhKH.getMaDonHang()+"",i,0);
 					model_table_xuat.setValueAt(dhKH.getTenKhachHang(),i,1);
-					model_table_xuat.setValueAt(dhKH.getTenSanPham(),i,2);
+					model_table_xuat.setValueAt(dhKH.getNgayXuat(),i,2);
 					model_table_xuat.setValueAt(dhKH.getSoLuong()+"",i,3);
 					model_table_xuat.setValueAt(dhKH.getTongTien()+"",i,4);
 				}
@@ -872,11 +892,11 @@ public class GUI extends JFrame {
 		model_table_xuat.getValueAt(i_row, 0);
 		int maDonHang = Integer.valueOf(model_table_xuat.getValueAt(i_row, 0)+"");
 		String tenKhachHang = model_table_xuat.getValueAt(i_row, 1)+"";
-		String tenSanPham = model_table_xuat.getValueAt(i_row, 2)+"";
+		String ngayXuat = model_table_xuat.getValueAt(i_row, 2)+"";
 		int soLuong = Integer.valueOf(model_table_xuat.getValueAt(i_row, 3)+"");
 		float thanhTien = Float.valueOf(model_table_xuat.getValueAt(i_row, 4)+"");
 		
-		DonHangKH dhKH = new DonHangKH(maDonHang, tenKhachHang, tenSanPham, soLuong, thanhTien);
+		DonHangKH dhKH = new DonHangKH(maDonHang, tenKhachHang, ngayXuat, soLuong, thanhTien);
 		return dhKH;
 	}
 	public void hienThiThongTinDonHangDaChon_xuat() {
@@ -884,7 +904,7 @@ public class GUI extends JFrame {
 		
 		this.textField_xuat_madon.setText(dhKH.getMaDonHang()+"");
 		this.textField_xuat_tenKH.setText(dhKH.getTenKhachHang()+"");
-		this.textField_xuat_tenSP.setText(dhKH.getTenSanPham()+"");
+		this.textField_xuat_ngayXuat.setText(dhKH.getNgayXuat()+"");
 		this.textField_xuat_soLuong.setText(dhKH.getSoLuong()+"");
 		this.textField_xuat_thanhTien.setText(dhKH.getTongTien()+"");
 	}
@@ -902,11 +922,11 @@ public class GUI extends JFrame {
 	public void thucHienThemDonHang_xuat() {
 		int maDonHang_xuat = Integer.valueOf(this.textField_xuat_madon.getText());
 		String tenKhachHang_xuat = this.textField_xuat_tenKH.getText();
-		String tenSanPham_xuat = this.textField_xuat_tenSP.getText();
+		String ngayXuat = this.textField_xuat_ngayXuat.getText();
 		int soLuong_xuat = Integer.valueOf(this.textField_xuat_soLuong.getText());
 		float thanhTien_xuat = Float.valueOf(this.textField_xuat_thanhTien.getText());
 		
-		DonHangKH dhKH = new DonHangKH(maDonHang_xuat, tenKhachHang_xuat, tenSanPham_xuat, soLuong_xuat, thanhTien_xuat);
+		DonHangKH dhKH = new DonHangKH(maDonHang_xuat, tenKhachHang_xuat, ngayXuat, soLuong_xuat, thanhTien_xuat);
 		this.themHoacCapNhatDonHang_xuat(dhKH);
 		
 	}
@@ -1044,7 +1064,7 @@ public void thucHienTim_xuat() {
 				Vector<String> vec = new Vector<String>();
 				vec.add(donHangKH.getMaDonHang()+"");
 				vec.add(donHangKH.getTenKhachHang());
-				vec.add(donHangKH.getTenSanPham());
+				vec.add(donHangKH.getNgayXuat()+"");
 				vec.add(donHangKH.getSoLuong()+"");
 				vec.add(donHangKH.getTongTien()+"");
 				

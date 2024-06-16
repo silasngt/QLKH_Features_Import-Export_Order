@@ -8,15 +8,23 @@ public class DonHang implements Serializable {
 	private int maNhaCungCap;
 	private nhaCungCap nhaCungCap;
 	private String tenSanPham;
+	private String ngayNhap;
+	public String getNgayNhap() {
+		return ngayNhap;
+	}
+	public void setNgayNhap(String ngayNhap) {
+		this.ngayNhap = ngayNhap;
+	}
 	private int soLuong;
 	private float TongTien;
 	public DonHang() {
 		
 	}
-	public DonHang(int maDonHang, model.nhaCungCap nhaCungCap, String tenSanPham, int soLuong, float tongTien) {
+	public DonHang(int maDonHang, model.nhaCungCap nhaCungCap, String tenSanPham, String ngayNhap,int soLuong, float tongTien) {
 		this.maDonHang = maDonHang;
 		this.nhaCungCap = nhaCungCap;
 		this.tenSanPham = tenSanPham;
+		this.ngayNhap = ngayNhap;
 		this.soLuong = soLuong;
 		TongTien = tongTien;
 	}
@@ -50,14 +58,10 @@ public class DonHang implements Serializable {
 	public void setTongTien(float tongTien) {
 		TongTien = tongTien;
 	}
-	@Override
-	public String toString() {
-		return "DonHang [maDonHang=" + maDonHang + ", nhaCungCap=" + nhaCungCap + ", tenSanPham=" + tenSanPham
-				+ ", soLuong=" + soLuong + ", TongTien=" + TongTien + "]";
-	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(TongTien, maDonHang, nhaCungCap, soLuong, tenSanPham);
+		return Objects.hash(TongTien, maDonHang, maNhaCungCap, ngayNhap, nhaCungCap, soLuong, tenSanPham);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -69,8 +73,15 @@ public class DonHang implements Serializable {
 			return false;
 		DonHang other = (DonHang) obj;
 		return Float.floatToIntBits(TongTien) == Float.floatToIntBits(other.TongTien) && maDonHang == other.maDonHang
+				&& maNhaCungCap == other.maNhaCungCap && Objects.equals(ngayNhap, other.ngayNhap)
 				&& Objects.equals(nhaCungCap, other.nhaCungCap) && soLuong == other.soLuong
 				&& Objects.equals(tenSanPham, other.tenSanPham);
+	}
+	@Override
+	public String toString() {
+		return "DonHang [maDonHang=" + maDonHang + ", maNhaCungCap=" + maNhaCungCap + ", nhaCungCap=" + nhaCungCap
+				+ ", tenSanPham=" + tenSanPham + ", ngayNhap=" + ngayNhap + ", soLuong=" + soLuong + ", TongTien="
+				+ TongTien + "]";
 	}
 	public int getMaNhaCungCap() {
 		return maNhaCungCap;

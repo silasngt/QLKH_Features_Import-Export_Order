@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class MyConnect {
 	protected Connection conn = null;
 
-	static final String url = "jdbc:mysql://localhost:3306/qlkh";
+	static final String url = "jdbc:mysql://localhost:3306/quanly";
 	static final String nameUser = "root";
-	static final String pass = "Tai2505@@";
+	static final String pass = "16082004";
 
 
 	public boolean openConnectDB() {

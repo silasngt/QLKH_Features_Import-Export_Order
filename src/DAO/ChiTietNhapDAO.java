@@ -28,6 +28,7 @@ public class ChiTietNhapDAO {
                 int maDonHang = resultSet.getInt("maDH");
                 int maNhaCungCap = resultSet.getInt("idNhaCungCap");
                 String tenSanPham = resultSet.getString("tenSP");
+                String ngayNhap = resultSet.getString("NgayNhap");
                 int soLuong = resultSet.getInt("SoLuong");
                 float tongTien = resultSet.getFloat("ThanhTien");
 
@@ -39,6 +40,7 @@ public class ChiTietNhapDAO {
                 donHang.setMaDonHang(maDonHang);
                 donHang.setNhaCungCap(ncc);
                 donHang.setTenSanPham(tenSanPham);
+                donHang.setNgayNhap(ngayNhap);
                 donHang.setSoLuong(soLuong);
                 donHang.setTongTien(tongTien);
 
